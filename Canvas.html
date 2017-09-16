@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d');/*
+        canvas.width = 1000;
+        canvas.height = 1000;
+
+
+
+        class Round {
+            constructor() {
+                this.minRadius = 5;
+                this.radius = 10;
+                this.positionX = Math.round(Math.random() * window.innerWidth);
+                this.positionY = Math.round(Math.random() * window.innerHeight);
+                this.color = "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.random() + ")";
+                this.maxRadius = Math.round(Math.random() * 150);
+            }
+            roundRect() {
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.shadowBlur = 5;
+                ctx.arc(this.positionX, this.positionY, this.radius, 0, 360);
+                ctx.fill();
+                ctx.closePath();
+                var status;
+                if (this.radius >= this.maxRadius) {
+                    status = true;
+                }
+                if (this.radius <= this.minRadius) {
+                    status = false;
+                }
+                if (status == undefined || status == false) {
+                    this.radius += 1;
+                }
+                if (status == true) {
+                    this.radius -= 40;
+                }
+
+            }
+        }
+
+        canvas.onclick = function (Event) {
+            var x = Event.clientX,
+                y = Event.clientY;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, 360)
+            ctx.fill();
+        }
+
+        var round = [];
+        for (var i = 1; i <= 60; i++) {
+            round[i] = new Round();
+        }
+
+        setInterval(function () {
+            ctx.clearRect(0, 0, canvas.height, canvas.width);
+            for (i = 1; i < 60; i++) {
+                round[i].roundRect();
+            }
+
+        }, 1000 / 20);*/
+var canvasHeight = window.innerHeight,
+    canvasWidth = window.innerWidth;
+
+canvas.height = 1500;
+canvas.width = 1500;
+
+
+class Round {
+    constructor() {
+        this.minRadius = 5;
+        this.radius = 10;
+        this.positionX = Math.round(Math.random() * window.innerWidth);
+        this.positionY = Math.round(Math.random() * window.innerHeight);
+        this.color = "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.random() + ")";
+        this.maxRadius = Math.round(Math.random() * 130);
+    }
+    roundRect() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 5;
+        ctx.arc(this.positionX, this.positionY, this.radius, 0, 360);
+        ctx.fill();
+        ctx.closePath();
+        if (this.radius < this.maxRadius) {
+            this.radius++;
+        }
+        if (this.radius >= this.maxRadius) {
+            this.radius = this.minRadius;
+            this.positionX = Math.round(Math.random() * window.innerWidth);
+            this.positionY = Math.round(Math.random() * window.innerHeight);
+            this.maxRadius = Math.round(Math.random() * 150);
+            this.color = "rgba(" + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.round(Math.random() * 255) + "," + Math.random() + ")";
+        }
+    }
+}
+
+/*
+        var round = new Round();
+        console.log(round);
+        console.log(window.innerHeight);
+        round.roundRect();
+*/
+canvas.onclick = function (Event) {
+    var x = Event.clientX,
+        y = Event.clientY;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, 360)
+    ctx.fill();
+}
+
+var round = [];
+for (var i = 1; i <= 40; i++) {
+    //console.log('it is work');
+    round[i] = new Round();
+    //console.log(round[i]);
+}
+
+setInterval(function () {
+    ctx.clearRect(0, 0, canvas.height, canvas.width);
+    for (i = 1; i < 40; i++) {
+        round[i].roundRect();
+    }
+
+}, 1000 / 20);
+    </script>
+</body>
+
+</html>
